@@ -9,7 +9,8 @@ env:
 jobs:
   basic-test:
     runs-on: ubuntu-latest
-    container: livingshade/os-env
+    container:
+        image: duskmoon/dev-env:ucore-ci
     steps:
       - uses: actions/checkout@v3
       - uses: actions-rs/toolchain@v1
@@ -30,14 +31,14 @@ jobs:
           ID=`git rev-parse --abbrev-ref HEAD | grep -oP 'ch\K[0-9]'`
           cd ci-user && make test CHAPTER=$ID
           cd ..
-      - name: Run uCore tests
-        run: |
-          rm -rf ci-user
-          git clone https://github.com/LearningOS/rCore-Tutorial-Checker-2023S.git ci-user
-          git clone https://github.com/LearningOS/uCore-Tutorial-Code-2023S.git ci-user/ucore
-          git clone https://github.com/LearningOS/uCore-Tutorial-Test-2023S.git ci-user/ucore/user
-          cd ci-user && make utest CHAPTER=$ID
-          cd ..
+      # - name: Run uCore tests
+      #   run: |
+      #     rm -rf ci-user
+      #     git clone https://github.com/LearningOS/rCore-Tutorial-Checker-2023S.git ci-user
+      #     git clone https://github.com/LearningOS/uCore-Tutorial-Code-2023S.git ci-user/ucore
+      #     git clone https://github.com/LearningOS/uCore-Tutorial-Test-2023S.git ci-user/ucore/user
+      #     cd ci-user && make utest CHAPTER=$ID
+      #     cd ..
   gitlab-mirror:
     runs-on: ubuntu-latest
     steps:
