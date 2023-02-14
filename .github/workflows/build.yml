@@ -42,7 +42,7 @@ jobs:
           else
             cd qemu-7.0.0
           fi
-          sudo make install
+          make install
           qemu-system-riscv64 --version
       - name: Run rCore tests
         run: |
