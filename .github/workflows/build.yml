@@ -31,8 +31,8 @@ jobs:
           key: qemu-7.0.0-x86_64-riscv64
       - name: Install QEMU
         run: |
-          sudo apt-get update
-          sudo apt-get install ninja-build -y
+          apt-get update
+          apt-get install ninja-build -y
           if [ ! -d qemu-7.0.0 ]; then
             wget https://download.qemu.org/qemu-7.0.0.tar.xz
             tar -xf qemu-7.0.0.tar.xz
