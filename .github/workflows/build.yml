@@ -26,9 +26,9 @@ jobs:
           use-tool-cache: true
       - name: Run rCore tests
         run: |
-          mkdir -p ci-user
           git config --global --add safe.directory /__w/rCore-Tutorial-Code-2023S/rCore-Tutorial-Code-2023S
-          git clone https://github.com/livingshade/rCore-Tutorial-Test-2023S.git ci-user/user
+          git clone https://github.com/LearningOS/rCore-Tutorial-Checker-2023S.git ci-user
+          git clone https://github.com/LearningOS/rCore-Tutorial-Test-2023S.git ci-user/user
           ID=`git rev-parse --abbrev-ref HEAD | grep -oP 'ch\K[0-9]'`
           cd ci-user && make test CHAPTER=$ID
           cd ..
