@@ -55,7 +55,8 @@ jobs:
       - name: Run uCore tests
         run: |
           rm -rf ci-user
+          echo $pwd
           git config --global --add safe.directory /__w/rCore-Tutorial-Code-2023S/rCore-Tutorial-Code-2023S
-          git clone https://github.com/livingshade/uCore-test-in-rCore.git ci-user
-          git clone https://github.com/LearningOS/uCore-Tutorial-Test-2023S.git ci-user/ucore
+          git clone -v https://github.com/livingshade/uCore-test-in-rCore.git ci-user
+          git clone -v https://github.com/LearningOS/uCore-Tutorial-Test-2023S.git ci-user/ucore
           cd ci-user && make utest CHAPTER=$ID
