@@ -52,25 +52,10 @@ jobs:
           ID=`git rev-parse --abbrev-ref HEAD | grep -oP 'ch\K[0-9]'`
           cd ci-user && make test CHAPTER=$ID
           cd ..
-      # - name: Run uCore tests
-      #   run: |
-      #     rm -rf ci-user
-      #     git clone https://github.com/LearningOS/rCore-Tutorial-Checker-2023S.git ci-user
-      #     git clone https://github.com/LearningOS/uCore-Tutorial-Code-2023S.git ci-user/ucore
-      #     git clone https://github.com/LearningOS/uCore-Tutorial-Test-2023S.git ci-user/ucore/user
-      #     cd ci-user && make utest CHAPTER=$ID
-      #     cd ..
-  gitlab-mirror:
-    runs-on: ubuntu-latest
-    steps:
-    - uses: actions/checkout@v1
-    - name: Mirror + trigger CI
-      uses: Gallium70/gitlab-mirror-and-ci-action@master
-      with:
-        args: "https://git.tsinghua.edu.cn/os-lab/public/rcore-tutorial-code-2023s"
-      env:
-        GITLAB_HOSTNAME: "git.tsinghua.edu.cn"
-        GITLAB_PROJECT_ID: "20776"
-        GITLAB_PROJECT_NAME: "rcore-tutorial-code-2023s"
-        GITLAB_PROJECT_TOKEN: ${{secrets.GITLAB_PROJECT_TOKEN}}
-        GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
+      - name: Run uCore tests
+        run: |
+          rm -rf ci-user
+          git config --global --add safe.directory /__w/rCore-Tutorial-Code-2023S/rCore-Tutorial-Code-2023S
+          git clone https://github.com/livingshade/uCore-test-in-rCore.git ci-user
+          git clone https://github.com/LearningOS/uCore-Tutorial-Test-2023S.git ci-user/ucore
+          cd ci-user && make utest CHAPTER=$ID
